@@ -1,0 +1,691 @@
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"Interrupt_Routines.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Custom_ISR_ADC,"ax",%progbits
+  20              		.align	2
+  21              		.global	Custom_ISR_ADC
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	Custom_ISR_ADC, %function
+  25              	Custom_ISR_ADC:
+  26              	.LFB64:
+  27              		.file 1 "Interrupt_Routines.c"
+   1:Interrupt_Routines.c **** /* ========================================
+   2:Interrupt_Routines.c ****  *
+   3:Interrupt_Routines.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:Interrupt_Routines.c ****  * All Rights Reserved
+   5:Interrupt_Routines.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:Interrupt_Routines.c ****  *
+   7:Interrupt_Routines.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:Interrupt_Routines.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:Interrupt_Routines.c ****  *
+  10:Interrupt_Routines.c ****  * ========================================
+  11:Interrupt_Routines.c **** */
+  12:Interrupt_Routines.c **** 
+  13:Interrupt_Routines.c **** #include "Interrupt_Routines.h"
+  14:Interrupt_Routines.c **** #include "project.h"
+  15:Interrupt_Routines.c **** 
+  16:Interrupt_Routines.c **** int32 value_digit;
+  17:Interrupt_Routines.c **** int32 value_mv;
+  18:Interrupt_Routines.c **** //char ch_received;
+  19:Interrupt_Routines.c **** //uint8 SendBytesFlag =0;
+  20:Interrupt_Routines.c **** 
+  21:Interrupt_Routines.c **** 
+  22:Interrupt_Routines.c **** CY_ISR (Custom_ISR_ADC)
+  23:Interrupt_Routines.c **** {
+  28              		.loc 1 23 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 2
+
+
+  35              		.cfi_offset 14, -4
+  24:Interrupt_Routines.c ****     //if (SendBytesFlag==1){
+  25:Interrupt_Routines.c ****         Timer_ADC_ReadStatusRegister();
+  36              		.loc 1 25 0
+  37 0002 FFF7FEFF 		bl	Timer_ADC_ReadStatusRegister
+  38              	.LVL0:
+  26:Interrupt_Routines.c ****         value_digit= ADC_DelSig_Read32();
+  39              		.loc 1 26 0
+  40 0006 FFF7FEFF 		bl	ADC_DelSig_Read32
+  41              	.LVL1:
+  42 000a 0C4B     		ldr	r3, .L5
+  43 000c 1860     		str	r0, [r3]
+  27:Interrupt_Routines.c ****         
+  28:Interrupt_Routines.c ****         if(value_digit>65535) value_digit=65535;
+  44              		.loc 1 28 0
+  45 000e B0F5803F 		cmp	r0, #65536
+  46 0012 02DB     		blt	.L2
+  47              		.loc 1 28 0 is_stmt 0 discriminator 1
+  48 0014 4FF6FF72 		movw	r2, #65535
+  49 0018 1A60     		str	r2, [r3]
+  50              	.L2:
+  29:Interrupt_Routines.c ****         if(value_digit<0) value_digit=0;
+  51              		.loc 1 29 0 is_stmt 1
+  52 001a 084B     		ldr	r3, .L5
+  53 001c 1B68     		ldr	r3, [r3]
+  54 001e 002B     		cmp	r3, #0
+  55 0020 02DA     		bge	.L3
+  56              		.loc 1 29 0 is_stmt 0 discriminator 1
+  57 0022 0022     		movs	r2, #0
+  58 0024 054B     		ldr	r3, .L5
+  59 0026 1A60     		str	r2, [r3]
+  60              	.L3:
+  30:Interrupt_Routines.c ****         
+  31:Interrupt_Routines.c ****         //value_mv = ADC_DelSig_CountsTo_mVolts(value_digit);
+  32:Interrupt_Routines.c ****         //sprintf(DataBuffer, "Sample: %ld mV\r\n", value_mv);
+  33:Interrupt_Routines.c ****         //Dobbiamo definire i bytes da mandare senza header e tail
+  34:Interrupt_Routines.c ****         
+  35:Interrupt_Routines.c ****         DataBuffer[1]=value_digit>>8; //prendo il più significativo 
+  61              		.loc 1 35 0 is_stmt 1
+  62 0028 044B     		ldr	r3, .L5
+  63 002a 1A68     		ldr	r2, [r3]
+  64 002c 1112     		asrs	r1, r2, #8
+  65 002e 044B     		ldr	r3, .L5+4
+  66 0030 5970     		strb	r1, [r3, #1]
+  36:Interrupt_Routines.c ****         DataBuffer[2]= value_digit & 0xFF; //prendo il meno significativo 
+  67              		.loc 1 36 0
+  68 0032 9A70     		strb	r2, [r3, #2]
+  37:Interrupt_Routines.c ****         
+  38:Interrupt_Routines.c ****         PacketReadyFlag =1;
+  69              		.loc 1 38 0
+  70 0034 0122     		movs	r2, #1
+  71 0036 034B     		ldr	r3, .L5+8
+  72 0038 1A70     		strb	r2, [r3]
+  73 003a 08BD     		pop	{r3, pc}
+  74              	.L6:
+  75              		.align	2
+  76              	.L5:
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 3
+
+
+  77 003c 00000000 		.word	value_digit
+  78 0040 00000000 		.word	DataBuffer
+  79 0044 00000000 		.word	PacketReadyFlag
+  80              		.cfi_endproc
+  81              	.LFE64:
+  82              		.size	Custom_ISR_ADC, .-Custom_ISR_ADC
+  83              		.comm	value_mv,4,4
+  84              		.comm	value_digit,4,4
+  85              		.comm	PacketReadyFlag,1,1
+  86              		.comm	DataBuffer,4,4
+  87              		.text
+  88              	.Letext0:
+  89              		.file 2 "d:\\programmi\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\arm-none-eabi\\i
+  90              		.file 3 "d:\\programmi\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\arm-none-eabi\\i
+  91              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+  92              		.file 5 "Interrupt_Routines.h"
+  93              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+  94              		.file 7 "Generated_Source\\PSoC5/Timer_ADC.h"
+  95              		.file 8 "Generated_Source\\PSoC5/ADC_DelSig.h"
+  96              		.section	.debug_info,"",%progbits
+  97              	.Ldebug_info0:
+  98 0000 61010000 		.4byte	0x161
+  99 0004 0400     		.2byte	0x4
+ 100 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 101 000a 04       		.byte	0x4
+ 102 000b 01       		.uleb128 0x1
+ 103 000c 54000000 		.4byte	.LASF25
+ 104 0010 0C       		.byte	0xc
+ 105 0011 1F010000 		.4byte	.LASF26
+ 106 0015 D8010000 		.4byte	.LASF27
+ 107 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 108 001d 00000000 		.4byte	0
+ 109 0021 00000000 		.4byte	.Ldebug_line0
+ 110 0025 02       		.uleb128 0x2
+ 111 0026 01       		.byte	0x1
+ 112 0027 06       		.byte	0x6
+ 113 0028 8C010000 		.4byte	.LASF0
+ 114 002c 02       		.uleb128 0x2
+ 115 002d 01       		.byte	0x1
+ 116 002e 08       		.byte	0x8
+ 117 002f 40000000 		.4byte	.LASF1
+ 118 0033 02       		.uleb128 0x2
+ 119 0034 02       		.byte	0x2
+ 120 0035 05       		.byte	0x5
+ 121 0036 BF010000 		.4byte	.LASF2
+ 122 003a 02       		.uleb128 0x2
+ 123 003b 02       		.byte	0x2
+ 124 003c 07       		.byte	0x7
+ 125 003d 0E000000 		.4byte	.LASF3
+ 126 0041 03       		.uleb128 0x3
+ 127 0042 A4010000 		.4byte	.LASF9
+ 128 0046 02       		.byte	0x2
+ 129 0047 3F       		.byte	0x3f
+ 130 0048 4C000000 		.4byte	0x4c
+ 131 004c 02       		.uleb128 0x2
+ 132 004d 04       		.byte	0x4
+ 133 004e 05       		.byte	0x5
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 4
+
+
+ 134 004f 49010000 		.4byte	.LASF4
+ 135 0053 02       		.uleb128 0x2
+ 136 0054 04       		.byte	0x4
+ 137 0055 07       		.byte	0x7
+ 138 0056 EA000000 		.4byte	.LASF5
+ 139 005a 02       		.uleb128 0x2
+ 140 005b 08       		.byte	0x8
+ 141 005c 05       		.byte	0x5
+ 142 005d 00000000 		.4byte	.LASF6
+ 143 0061 02       		.uleb128 0x2
+ 144 0062 08       		.byte	0x8
+ 145 0063 07       		.byte	0x7
+ 146 0064 FC000000 		.4byte	.LASF7
+ 147 0068 04       		.uleb128 0x4
+ 148 0069 04       		.byte	0x4
+ 149 006a 05       		.byte	0x5
+ 150 006b 696E7400 		.ascii	"int\000"
+ 151 006f 02       		.uleb128 0x2
+ 152 0070 04       		.byte	0x4
+ 153 0071 07       		.byte	0x7
+ 154 0072 21000000 		.4byte	.LASF8
+ 155 0076 03       		.uleb128 0x3
+ 156 0077 E2000000 		.4byte	.LASF10
+ 157 007b 03       		.byte	0x3
+ 158 007c 2C       		.byte	0x2c
+ 159 007d 41000000 		.4byte	0x41
+ 160 0081 05       		.uleb128 0x5
+ 161 0082 4E000000 		.4byte	.LASF11
+ 162 0086 04       		.byte	0x4
+ 163 0087 E801     		.2byte	0x1e8
+ 164 0089 2C000000 		.4byte	0x2c
+ 165 008d 05       		.uleb128 0x5
+ 166 008e 2F020000 		.4byte	.LASF12
+ 167 0092 04       		.byte	0x4
+ 168 0093 ED01     		.2byte	0x1ed
+ 169 0095 4C000000 		.4byte	0x4c
+ 170 0099 02       		.uleb128 0x2
+ 171 009a 04       		.byte	0x4
+ 172 009b 04       		.byte	0x4
+ 173 009c AE010000 		.4byte	.LASF13
+ 174 00a0 02       		.uleb128 0x2
+ 175 00a1 08       		.byte	0x8
+ 176 00a2 04       		.byte	0x4
+ 177 00a3 78010000 		.4byte	.LASF14
+ 178 00a7 02       		.uleb128 0x2
+ 179 00a8 01       		.byte	0x1
+ 180 00a9 08       		.byte	0x8
+ 181 00aa 44010000 		.4byte	.LASF15
+ 182 00ae 06       		.uleb128 0x6
+ 183 00af 81000000 		.4byte	0x81
+ 184 00b3 02       		.uleb128 0x2
+ 185 00b4 08       		.byte	0x8
+ 186 00b5 04       		.byte	0x4
+ 187 00b6 98010000 		.4byte	.LASF16
+ 188 00ba 02       		.uleb128 0x2
+ 189 00bb 04       		.byte	0x4
+ 190 00bc 07       		.byte	0x7
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 5
+
+
+ 191 00bd 26020000 		.4byte	.LASF17
+ 192 00c1 07       		.uleb128 0x7
+ 193 00c2 C9010000 		.4byte	.LASF28
+ 194 00c6 01       		.byte	0x1
+ 195 00c7 16       		.byte	0x16
+ 196 00c8 00000000 		.4byte	.LFB64
+ 197 00cc 48000000 		.4byte	.LFE64-.LFB64
+ 198 00d0 01       		.uleb128 0x1
+ 199 00d1 9C       		.byte	0x9c
+ 200 00d2 E9000000 		.4byte	0xe9
+ 201 00d6 08       		.uleb128 0x8
+ 202 00d7 06000000 		.4byte	.LVL0
+ 203 00db 4E010000 		.4byte	0x14e
+ 204 00df 08       		.uleb128 0x8
+ 205 00e0 0A000000 		.4byte	.LVL1
+ 206 00e4 59010000 		.4byte	0x159
+ 207 00e8 00       		.byte	0
+ 208 00e9 09       		.uleb128 0x9
+ 209 00ea 81000000 		.4byte	0x81
+ 210 00ee F9000000 		.4byte	0xf9
+ 211 00f2 0A       		.uleb128 0xa
+ 212 00f3 BA000000 		.4byte	0xba
+ 213 00f7 03       		.byte	0x3
+ 214 00f8 00       		.byte	0
+ 215 00f9 0B       		.uleb128 0xb
+ 216 00fa B4010000 		.4byte	.LASF18
+ 217 00fe 05       		.byte	0x5
+ 218 00ff 1C       		.byte	0x1c
+ 219 0100 E9000000 		.4byte	0xe9
+ 220 0104 05       		.uleb128 0x5
+ 221 0105 03       		.byte	0x3
+ 222 0106 00000000 		.4byte	DataBuffer
+ 223 010a 0B       		.uleb128 0xb
+ 224 010b 34010000 		.4byte	.LASF19
+ 225 010f 05       		.byte	0x5
+ 226 0110 1D       		.byte	0x1d
+ 227 0111 AE000000 		.4byte	0xae
+ 228 0115 05       		.uleb128 0x5
+ 229 0116 03       		.byte	0x3
+ 230 0117 00000000 		.4byte	PacketReadyFlag
+ 231 011b 0C       		.uleb128 0xc
+ 232 011c 7F010000 		.4byte	.LASF20
+ 233 0120 06       		.byte	0x6
+ 234 0121 1207     		.2byte	0x712
+ 235 0123 27010000 		.4byte	0x127
+ 236 0127 06       		.uleb128 0x6
+ 237 0128 76000000 		.4byte	0x76
+ 238 012c 0B       		.uleb128 0xb
+ 239 012d 13010000 		.4byte	.LASF21
+ 240 0131 01       		.byte	0x1
+ 241 0132 10       		.byte	0x10
+ 242 0133 8D000000 		.4byte	0x8d
+ 243 0137 05       		.uleb128 0x5
+ 244 0138 03       		.byte	0x3
+ 245 0139 00000000 		.4byte	value_digit
+ 246 013d 0B       		.uleb128 0xb
+ 247 013e 52010000 		.4byte	.LASF22
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 6
+
+
+ 248 0142 01       		.byte	0x1
+ 249 0143 11       		.byte	0x11
+ 250 0144 8D000000 		.4byte	0x8d
+ 251 0148 05       		.uleb128 0x5
+ 252 0149 03       		.byte	0x3
+ 253 014a 00000000 		.4byte	value_mv
+ 254 014e 0D       		.uleb128 0xd
+ 255 014f 5B010000 		.4byte	.LASF23
+ 256 0153 5B010000 		.4byte	.LASF23
+ 257 0157 07       		.byte	0x7
+ 258 0158 5E       		.byte	0x5e
+ 259 0159 0D       		.uleb128 0xd
+ 260 015a 2E000000 		.4byte	.LASF24
+ 261 015e 2E000000 		.4byte	.LASF24
+ 262 0162 08       		.byte	0x8
+ 263 0163 56       		.byte	0x56
+ 264 0164 00       		.byte	0
+ 265              		.section	.debug_abbrev,"",%progbits
+ 266              	.Ldebug_abbrev0:
+ 267 0000 01       		.uleb128 0x1
+ 268 0001 11       		.uleb128 0x11
+ 269 0002 01       		.byte	0x1
+ 270 0003 25       		.uleb128 0x25
+ 271 0004 0E       		.uleb128 0xe
+ 272 0005 13       		.uleb128 0x13
+ 273 0006 0B       		.uleb128 0xb
+ 274 0007 03       		.uleb128 0x3
+ 275 0008 0E       		.uleb128 0xe
+ 276 0009 1B       		.uleb128 0x1b
+ 277 000a 0E       		.uleb128 0xe
+ 278 000b 55       		.uleb128 0x55
+ 279 000c 17       		.uleb128 0x17
+ 280 000d 11       		.uleb128 0x11
+ 281 000e 01       		.uleb128 0x1
+ 282 000f 10       		.uleb128 0x10
+ 283 0010 17       		.uleb128 0x17
+ 284 0011 00       		.byte	0
+ 285 0012 00       		.byte	0
+ 286 0013 02       		.uleb128 0x2
+ 287 0014 24       		.uleb128 0x24
+ 288 0015 00       		.byte	0
+ 289 0016 0B       		.uleb128 0xb
+ 290 0017 0B       		.uleb128 0xb
+ 291 0018 3E       		.uleb128 0x3e
+ 292 0019 0B       		.uleb128 0xb
+ 293 001a 03       		.uleb128 0x3
+ 294 001b 0E       		.uleb128 0xe
+ 295 001c 00       		.byte	0
+ 296 001d 00       		.byte	0
+ 297 001e 03       		.uleb128 0x3
+ 298 001f 16       		.uleb128 0x16
+ 299 0020 00       		.byte	0
+ 300 0021 03       		.uleb128 0x3
+ 301 0022 0E       		.uleb128 0xe
+ 302 0023 3A       		.uleb128 0x3a
+ 303 0024 0B       		.uleb128 0xb
+ 304 0025 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 7
+
+
+ 305 0026 0B       		.uleb128 0xb
+ 306 0027 49       		.uleb128 0x49
+ 307 0028 13       		.uleb128 0x13
+ 308 0029 00       		.byte	0
+ 309 002a 00       		.byte	0
+ 310 002b 04       		.uleb128 0x4
+ 311 002c 24       		.uleb128 0x24
+ 312 002d 00       		.byte	0
+ 313 002e 0B       		.uleb128 0xb
+ 314 002f 0B       		.uleb128 0xb
+ 315 0030 3E       		.uleb128 0x3e
+ 316 0031 0B       		.uleb128 0xb
+ 317 0032 03       		.uleb128 0x3
+ 318 0033 08       		.uleb128 0x8
+ 319 0034 00       		.byte	0
+ 320 0035 00       		.byte	0
+ 321 0036 05       		.uleb128 0x5
+ 322 0037 16       		.uleb128 0x16
+ 323 0038 00       		.byte	0
+ 324 0039 03       		.uleb128 0x3
+ 325 003a 0E       		.uleb128 0xe
+ 326 003b 3A       		.uleb128 0x3a
+ 327 003c 0B       		.uleb128 0xb
+ 328 003d 3B       		.uleb128 0x3b
+ 329 003e 05       		.uleb128 0x5
+ 330 003f 49       		.uleb128 0x49
+ 331 0040 13       		.uleb128 0x13
+ 332 0041 00       		.byte	0
+ 333 0042 00       		.byte	0
+ 334 0043 06       		.uleb128 0x6
+ 335 0044 35       		.uleb128 0x35
+ 336 0045 00       		.byte	0
+ 337 0046 49       		.uleb128 0x49
+ 338 0047 13       		.uleb128 0x13
+ 339 0048 00       		.byte	0
+ 340 0049 00       		.byte	0
+ 341 004a 07       		.uleb128 0x7
+ 342 004b 2E       		.uleb128 0x2e
+ 343 004c 01       		.byte	0x1
+ 344 004d 3F       		.uleb128 0x3f
+ 345 004e 19       		.uleb128 0x19
+ 346 004f 03       		.uleb128 0x3
+ 347 0050 0E       		.uleb128 0xe
+ 348 0051 3A       		.uleb128 0x3a
+ 349 0052 0B       		.uleb128 0xb
+ 350 0053 3B       		.uleb128 0x3b
+ 351 0054 0B       		.uleb128 0xb
+ 352 0055 27       		.uleb128 0x27
+ 353 0056 19       		.uleb128 0x19
+ 354 0057 11       		.uleb128 0x11
+ 355 0058 01       		.uleb128 0x1
+ 356 0059 12       		.uleb128 0x12
+ 357 005a 06       		.uleb128 0x6
+ 358 005b 40       		.uleb128 0x40
+ 359 005c 18       		.uleb128 0x18
+ 360 005d 9742     		.uleb128 0x2117
+ 361 005f 19       		.uleb128 0x19
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 8
+
+
+ 362 0060 01       		.uleb128 0x1
+ 363 0061 13       		.uleb128 0x13
+ 364 0062 00       		.byte	0
+ 365 0063 00       		.byte	0
+ 366 0064 08       		.uleb128 0x8
+ 367 0065 898201   		.uleb128 0x4109
+ 368 0068 00       		.byte	0
+ 369 0069 11       		.uleb128 0x11
+ 370 006a 01       		.uleb128 0x1
+ 371 006b 31       		.uleb128 0x31
+ 372 006c 13       		.uleb128 0x13
+ 373 006d 00       		.byte	0
+ 374 006e 00       		.byte	0
+ 375 006f 09       		.uleb128 0x9
+ 376 0070 01       		.uleb128 0x1
+ 377 0071 01       		.byte	0x1
+ 378 0072 49       		.uleb128 0x49
+ 379 0073 13       		.uleb128 0x13
+ 380 0074 01       		.uleb128 0x1
+ 381 0075 13       		.uleb128 0x13
+ 382 0076 00       		.byte	0
+ 383 0077 00       		.byte	0
+ 384 0078 0A       		.uleb128 0xa
+ 385 0079 21       		.uleb128 0x21
+ 386 007a 00       		.byte	0
+ 387 007b 49       		.uleb128 0x49
+ 388 007c 13       		.uleb128 0x13
+ 389 007d 2F       		.uleb128 0x2f
+ 390 007e 0B       		.uleb128 0xb
+ 391 007f 00       		.byte	0
+ 392 0080 00       		.byte	0
+ 393 0081 0B       		.uleb128 0xb
+ 394 0082 34       		.uleb128 0x34
+ 395 0083 00       		.byte	0
+ 396 0084 03       		.uleb128 0x3
+ 397 0085 0E       		.uleb128 0xe
+ 398 0086 3A       		.uleb128 0x3a
+ 399 0087 0B       		.uleb128 0xb
+ 400 0088 3B       		.uleb128 0x3b
+ 401 0089 0B       		.uleb128 0xb
+ 402 008a 49       		.uleb128 0x49
+ 403 008b 13       		.uleb128 0x13
+ 404 008c 3F       		.uleb128 0x3f
+ 405 008d 19       		.uleb128 0x19
+ 406 008e 02       		.uleb128 0x2
+ 407 008f 18       		.uleb128 0x18
+ 408 0090 00       		.byte	0
+ 409 0091 00       		.byte	0
+ 410 0092 0C       		.uleb128 0xc
+ 411 0093 34       		.uleb128 0x34
+ 412 0094 00       		.byte	0
+ 413 0095 03       		.uleb128 0x3
+ 414 0096 0E       		.uleb128 0xe
+ 415 0097 3A       		.uleb128 0x3a
+ 416 0098 0B       		.uleb128 0xb
+ 417 0099 3B       		.uleb128 0x3b
+ 418 009a 05       		.uleb128 0x5
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 9
+
+
+ 419 009b 49       		.uleb128 0x49
+ 420 009c 13       		.uleb128 0x13
+ 421 009d 3F       		.uleb128 0x3f
+ 422 009e 19       		.uleb128 0x19
+ 423 009f 3C       		.uleb128 0x3c
+ 424 00a0 19       		.uleb128 0x19
+ 425 00a1 00       		.byte	0
+ 426 00a2 00       		.byte	0
+ 427 00a3 0D       		.uleb128 0xd
+ 428 00a4 2E       		.uleb128 0x2e
+ 429 00a5 00       		.byte	0
+ 430 00a6 3F       		.uleb128 0x3f
+ 431 00a7 19       		.uleb128 0x19
+ 432 00a8 3C       		.uleb128 0x3c
+ 433 00a9 19       		.uleb128 0x19
+ 434 00aa 6E       		.uleb128 0x6e
+ 435 00ab 0E       		.uleb128 0xe
+ 436 00ac 03       		.uleb128 0x3
+ 437 00ad 0E       		.uleb128 0xe
+ 438 00ae 3A       		.uleb128 0x3a
+ 439 00af 0B       		.uleb128 0xb
+ 440 00b0 3B       		.uleb128 0x3b
+ 441 00b1 0B       		.uleb128 0xb
+ 442 00b2 00       		.byte	0
+ 443 00b3 00       		.byte	0
+ 444 00b4 00       		.byte	0
+ 445              		.section	.debug_aranges,"",%progbits
+ 446 0000 1C000000 		.4byte	0x1c
+ 447 0004 0200     		.2byte	0x2
+ 448 0006 00000000 		.4byte	.Ldebug_info0
+ 449 000a 04       		.byte	0x4
+ 450 000b 00       		.byte	0
+ 451 000c 0000     		.2byte	0
+ 452 000e 0000     		.2byte	0
+ 453 0010 00000000 		.4byte	.LFB64
+ 454 0014 48000000 		.4byte	.LFE64-.LFB64
+ 455 0018 00000000 		.4byte	0
+ 456 001c 00000000 		.4byte	0
+ 457              		.section	.debug_ranges,"",%progbits
+ 458              	.Ldebug_ranges0:
+ 459 0000 00000000 		.4byte	.LFB64
+ 460 0004 48000000 		.4byte	.LFE64
+ 461 0008 00000000 		.4byte	0
+ 462 000c 00000000 		.4byte	0
+ 463              		.section	.debug_line,"",%progbits
+ 464              	.Ldebug_line0:
+ 465 0000 97010000 		.section	.debug_str,"MS",%progbits,1
+ 465      02006D01 
+ 465      00000201 
+ 465      FB0E0D00 
+ 465      01010101 
+ 466              	.LASF6:
+ 467 0000 6C6F6E67 		.ascii	"long long int\000"
+ 467      206C6F6E 
+ 467      6720696E 
+ 467      7400
+ 468              	.LASF3:
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 10
+
+
+ 469 000e 73686F72 		.ascii	"short unsigned int\000"
+ 469      7420756E 
+ 469      7369676E 
+ 469      65642069 
+ 469      6E7400
+ 470              	.LASF8:
+ 471 0021 756E7369 		.ascii	"unsigned int\000"
+ 471      676E6564 
+ 471      20696E74 
+ 471      00
+ 472              	.LASF24:
+ 473 002e 4144435F 		.ascii	"ADC_DelSig_Read32\000"
+ 473      44656C53 
+ 473      69675F52 
+ 473      65616433 
+ 473      3200
+ 474              	.LASF1:
+ 475 0040 756E7369 		.ascii	"unsigned char\000"
+ 475      676E6564 
+ 475      20636861 
+ 475      7200
+ 476              	.LASF11:
+ 477 004e 75696E74 		.ascii	"uint8\000"
+ 477      3800
+ 478              	.LASF25:
+ 479 0054 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 479      43313120 
+ 479      352E342E 
+ 479      31203230 
+ 479      31363036 
+ 480 0087 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 480      20726576 
+ 480      6973696F 
+ 480      6E203233 
+ 480      37373135 
+ 481 00ba 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 481      66756E63 
+ 481      74696F6E 
+ 481      2D736563 
+ 481      74696F6E 
+ 482              	.LASF10:
+ 483 00e2 696E7433 		.ascii	"int32_t\000"
+ 483      325F7400 
+ 484              	.LASF5:
+ 485 00ea 6C6F6E67 		.ascii	"long unsigned int\000"
+ 485      20756E73 
+ 485      69676E65 
+ 485      6420696E 
+ 485      7400
+ 486              	.LASF7:
+ 487 00fc 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 487      206C6F6E 
+ 487      6720756E 
+ 487      7369676E 
+ 487      65642069 
+ 488              	.LASF21:
+ 489 0113 76616C75 		.ascii	"value_digit\000"
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 11
+
+
+ 489      655F6469 
+ 489      67697400 
+ 490              	.LASF26:
+ 491 011f 496E7465 		.ascii	"Interrupt_Routines.c\000"
+ 491      72727570 
+ 491      745F526F 
+ 491      7574696E 
+ 491      65732E63 
+ 492              	.LASF19:
+ 493 0134 5061636B 		.ascii	"PacketReadyFlag\000"
+ 493      65745265 
+ 493      61647946 
+ 493      6C616700 
+ 494              	.LASF15:
+ 495 0144 63686172 		.ascii	"char\000"
+ 495      00
+ 496              	.LASF4:
+ 497 0149 6C6F6E67 		.ascii	"long int\000"
+ 497      20696E74 
+ 497      00
+ 498              	.LASF22:
+ 499 0152 76616C75 		.ascii	"value_mv\000"
+ 499      655F6D76 
+ 499      00
+ 500              	.LASF23:
+ 501 015b 54696D65 		.ascii	"Timer_ADC_ReadStatusRegister\000"
+ 501      725F4144 
+ 501      435F5265 
+ 501      61645374 
+ 501      61747573 
+ 502              	.LASF14:
+ 503 0178 646F7562 		.ascii	"double\000"
+ 503      6C6500
+ 504              	.LASF20:
+ 505 017f 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 505      52784275 
+ 505      66666572 
+ 505      00
+ 506              	.LASF0:
+ 507 018c 7369676E 		.ascii	"signed char\000"
+ 507      65642063 
+ 507      68617200 
+ 508              	.LASF16:
+ 509 0198 6C6F6E67 		.ascii	"long double\000"
+ 509      20646F75 
+ 509      626C6500 
+ 510              	.LASF9:
+ 511 01a4 5F5F696E 		.ascii	"__int32_t\000"
+ 511      7433325F 
+ 511      7400
+ 512              	.LASF13:
+ 513 01ae 666C6F61 		.ascii	"float\000"
+ 513      7400
+ 514              	.LASF18:
+ 515 01b4 44617461 		.ascii	"DataBuffer\000"
+ 515      42756666 
+ 515      657200
+ARM GAS  C:\Users\fedet\AppData\Local\Temp\ccLwiVmy.s 			page 12
+
+
+ 516              	.LASF2:
+ 517 01bf 73686F72 		.ascii	"short int\000"
+ 517      7420696E 
+ 517      7400
+ 518              	.LASF28:
+ 519 01c9 43757374 		.ascii	"Custom_ISR_ADC\000"
+ 519      6F6D5F49 
+ 519      53525F41 
+ 519      444300
+ 520              	.LASF27:
+ 521 01d8 443A5C55 		.ascii	"D:\\Users\\Desktop\\LAB_Proj4\\LAB_Project4_RealTim"
+ 521      73657273 
+ 521      5C446573 
+ 521      6B746F70 
+ 521      5C4C4142 
+ 522 0207 6542696F 		.ascii	"eBioSign\\Project4_prova1.cydsn\000"
+ 522      5369676E 
+ 522      5C50726F 
+ 522      6A656374 
+ 522      345F7072 
+ 523              	.LASF17:
+ 524 0226 73697A65 		.ascii	"sizetype\000"
+ 524      74797065 
+ 524      00
+ 525              	.LASF12:
+ 526 022f 696E7433 		.ascii	"int32\000"
+ 526      3200
+ 527              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

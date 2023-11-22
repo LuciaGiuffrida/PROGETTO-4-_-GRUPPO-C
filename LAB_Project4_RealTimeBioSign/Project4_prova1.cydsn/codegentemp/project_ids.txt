@@ -1,0 +1,7 @@
+D:\Users\Desktop\LAB_Proj4\LAB_Project4_RealTimeBioSign\Project4_prova1.cydsn\Project4_prova1.cyprj|9c46d2d4-9b43-4d96-8933-26ead8343584
+D:\Users\Desktop\UNI\I sem\LAB di TECNOLOGIE ELETTRONICHE e BIOSENSORI\Support Materials\PSOC\PSoC_AnnotationLibrary\AnnotationLibrary\AnnotationLibrary_lib\AnnotationLibrary_lib.cylib\AnnotationLibrary_lib.cyprj|ad8abe78-e991-43f5-a89f-faa7547be7af
+D:\Programmi\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|57d7445a-6fb6-4b4e-b25b-920c4b69bfe7
+D:\Users\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|92472148-54a4-4255-84f4-85b23fa1270d
+D:\Programmi\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|6504e672-a5d9-4018-bbbb-ab15bf6d018e
+D:\Programmi\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|ff2bc298-dfc3-4e8a-a28a-dc1b1f161188
+D:\Programmi\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|fc77e938-a5f0-4fc9-866d-b59a42aabea7

@@ -1,0 +1,78 @@
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/CortexM3/ARM_GCC_541/Debug/main.o : D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig_AMux.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig_Ext_CP_Clk.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig_IRQ.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig_theACLK.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CYDMAC.H D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CYFITTER.H D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CyDmac.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CyFlash.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CyLib.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CySpc.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/Pin_LED.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/Pin_LED_aliases.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/Timer_ADC.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/UART.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/UART_IntClock.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1_DacClk.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1_VDAC8.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1_Wave1_DMA_dma.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1_Wave2_DMA_dma.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cmsis_armcc.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cmsis_compiler.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cmsis_gcc.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/core_cm3.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cyPm.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cy_em_eeprom.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cydevice.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cydevice_trm.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cydisabledsheets.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cyfitter.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cypins.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cytypes.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/isr_ADC.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/project.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/timer_clock.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Interrupt_Routines.h D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/main.c 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig_AMux.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig_Ext_CP_Clk.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig_IRQ.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/ADC_DelSig_theACLK.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CYDMAC.H : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CYFITTER.H : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CyFlash.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CyLib.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/CySpc.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/Pin_LED.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/Pin_LED_aliases.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/Timer_ADC.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/UART.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/UART_IntClock.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1_DacClk.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1_VDAC8.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1_Wave1_DMA_dma.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/WaveDAC8_1_Wave2_DMA_dma.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cmsis_armcc.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cmsis_compiler.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cmsis_gcc.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/core_cm3.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cyPm.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cy_em_eeprom.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cydevice.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cydevice_trm.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cydisabledsheets.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cypins.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/cytypes.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/isr_ADC.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/project.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Generated_Source/PSoC5/timer_clock.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/Interrupt_Routines.h : 
+
+D:/Users/Desktop/LAB_Proj4/LAB_Project4_RealTimeBioSign/Project4_prova1.cydsn/main.c : 
+
